@@ -1,0 +1,4 @@
+jquery-iswitch
+==============
+
+jQuery iSwitch
