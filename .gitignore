@@ -1,0 +1,12 @@
+## netbeans
+/nbproject
+/nbproject/private/
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.sublime-project
+*sublime-workspace
