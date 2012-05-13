@@ -9,4 +9,4 @@
 *.swp
 *.out
 *.sublime-project
-*sublime-workspace
+*.sublime-workspace
