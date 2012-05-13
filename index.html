@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>jQuery iSwitch</title>
+        <link media="screen" rel="stylesheet" type="text/css" href="css/style.css" />
+        <link media="screen" rel="stylesheet" type="text/css" href="css/jquery.iswitch.css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.iswitch.min.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+               $('.iswitch_iphone').iSwitch();
+               $('.iswitch_ipad').iSwitch({style: 'ipad'});
+            });
+        </script>
+    </head>
+    <body>
+        <h1>jQuery iSwitch</h1>
+
+        <div class="checkboxes group">
+            <h3>CHECKBOX (iPhone)</h3>
+            <p>
+                <label for="checkbox1" id="control1">Disabled</label>
+                <input class="iswitch_iphone" type="checkbox" name="checkbox1" id="checkbox1" disabled="disabled"/>
+            </p>
+            <p>
+                <label for="checkbox2" id="control2">Checked</label>
+                <input class="iswitch_iphone" type="checkbox" name="checkbox2" id="checkbox2" checked="checked"/>
+            </p>
+            <p>
+                <label for="checkbox3" id="control3">Normal</label>
+                <input class="iswitch_iphone" type="checkbox" name="checkbox3" id="checkbox3" />
+            </p>
+        </div>
+
+        <div class="checkboxes group">
+            <h3>CHECKBOX (iPad)</h3>
+            <p>
+                <label for="checkbox4" id="control4">Normal</label>
+                <input class="iswitch_ipad" type="checkbox" name="checkbox4" id="checkbox4" />
+            </p>
+            <p>
+                <label for="checkbox5" id="control5">Checked</label>
+                <input class="iswitch_ipad" type="checkbox" name="checkbox5" id="checkbox5" checked="checked" />
+            </p>
+            <p>
+                <label for="checkbox6" id="control6">Disabled</label>
+                <input class="iswitch_ipad" type="checkbox" name="checkbox6" id="checkbox6" checked="checked"  disabled="disabled" />
+            </p>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="radios group">
+            <h3>RADIO (iPhone)</h3>
+            <p>
+                <label for="radio7-1" id="control7-1">Option 1</label>
+                <input class="iswitch_iphone" type="radio" name="radio7" id="radio7-1" />
+            </p>
+            <p>
+                <label for="radio7-1" id="control7-2">Option 2</label>
+                <input class="iswitch_iphone" type="radio" name="radio7" id="radio7-2" />
+            </p>
+            <p>
+                <label for="radio7-1" id="control7-3">Option 3</label>
+                <input class="iswitch_iphone" type="radio" name="radio7" id="radio7-3" />
+            </p>
+        </div>
+
+        <div class="radios group">
+            <h3>RADIO (iPad)</h3>
+            <p>
+                <label for="radio8-1" id="control8-1">Option 1</label>
+                <input class="iswitch_ipad" type="radio" name="radio8" id="radio8-1" />
+            </p>
+            <p>
+                <label for="radio8-1" id="control8-2">Option 2</label>
+                <input class="iswitch_ipad" type="radio" name="radio8" id="radio8-2" />
+            </p>
+            <p>
+                <label for="radio8-1" id="control8-3">Option 3</label>
+                <input class="iswitch_ipad" type="radio" name="radio8" id="radio8-3" />
+            </p>
+        </div>
+
+        <div class="clear"></div>
+
+        <p>
+            <br/><br/>
+        </p>
+    </body>
+</html>

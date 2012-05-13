@@ -1,0 +1,197 @@
+/**
+ * @author  casterx
+ * @email   thmnhat@gmail.com
+ * @see     http://minhnhat.me/projects/jquery-iswitch
+ * @porject jQuery iSwitch
+ * @version 0.1
+ */
+.iswitch-processed {
+     display: none;
+ }
+
+.iswitch-container {
+    display       : inline-block;
+    vertical-align: middle;
+    overflow      : visible;
+    white-space   : nowrap;
+    font-size     : 15px;
+    line-height   : 25px;
+    position      : relative;
+    height        : 25px;
+
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+          -ouser-select: none;
+            user-select: none;
+ }
+
+.iswitch-label {
+    cursor     : pointer !important;
+    display    : block;
+    position   : absolute;
+    width      : auto;
+    top        : 0;
+    overflow   : hidden;
+    font-weight: bold;
+    font-family: Helvetica, "Helvetica Neue", Arial, sans-serif !important;
+    overflow   : hidden,
+
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+          -ouser-select: none;
+            user-select: none;
+ }
+
+.iswitch-label-on {
+    text-align : left;
+    left       : 0;
+    color      : #fff;
+
+    -webkit-text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+     -khtml-text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+       -moz-text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+        -ms-text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+         -o-text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+ }
+
+.iswitch-label-off {
+    text-align : right;
+    right      : 0;
+    color      : #7f7f7f;
+
+    -webkit-text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+     -khtml-text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+       -moz-text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+        -ms-text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+         -o-text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+            text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+ }
+
+.iswitch-label-text {
+    position: relative;
+    z-index : 2;
+    display : block;
+}
+
+.iswitch-label-bg {
+    display : block;
+    position: absolute;
+    width   : 100%;
+    height  : 100%;
+    z-index : 1;
+}
+
+.iswitch-handle {
+    position: absolute;
+    cursor  : pointer !important;
+    z-index : 3;
+}
+
+/**
+ * Style: iPad
+ */
+.iswitch-style-ipad-default .iswitch-label,
+.iswitch-style-ipad-default .iswitch-label .iswitch-label-bg,
+.iswitch-style-ipad-default .iswitch-handle-inner {
+    background : url(../images/iswitch-style-ipad-default.png) 0 0 no-repeat;
+}
+
+.iswitch-style-ipad-default .iswitch-label {
+    height: 25px;
+}
+
+.iswitch-style-ipad-default .iswitch-label-on {
+    background-position: 0 -127px;
+}
+
+.iswitch-style-ipad-default .iswitch-label-off {
+    background-position: 100% -37px;
+}
+
+.iswitch-style-ipad-default .iswitch-label-on .iswitch-label-text {
+    margin-left: 10px;
+}
+
+.iswitch-style-ipad-default .iswitch-label-off .iswitch-label-text {
+    margin-right: 19px;
+    padding-top : 1px;
+}
+
+.iswitch-style-ipad-default .iswitch-label-on .iswitch-label-bg {
+    background-position: 0 -172px;
+    background-repeat  : repeat-x;
+}
+
+.iswitch-style-ipad-default .iswitch-label-off .iswitch-label-bg {
+    background-position: 0 -82px;
+    background-repeat  : repeat-x;
+}
+
+.iswitch-style-ipad-default .iswitch-handle {
+    width   : 25px;
+    height  : 27px;
+    position: relative;
+    overflow: visible;
+}
+
+.iswitch-style-ipad-default .iswitch-handle-inner {
+    width   : 29px;
+    height  : 29px;
+    position: absolute;
+    top     : -1px;
+    left    : -2px;
+}
+
+.iswitch-state-disabled {
+    opacity: 0.5;
+    filter : alpha(opacity=50);
+}
+
+/**
+ * Style: iPhone
+ */
+.iswitch-style-iphone-default .iswitch-label,
+.iswitch-style-iphone-default .iswitch-label .iswitch-label-bg,
+.iswitch-style-iphone-default .iswitch-handle {
+    background : url(../images/iswitch-style-iphone-default.png) 50% 0 no-repeat;
+}
+
+.iswitch-style-iphone-default .iswitch-label {
+    height: 25px;
+}
+
+.iswitch-style-iphone-default .iswitch-label-on {
+    background-position: 0 -125px;
+}
+
+.iswitch-style-iphone-default .iswitch-label-off {
+    background-position: 100% -35px;
+}
+
+.iswitch-style-iphone-default .iswitch-label-on .iswitch-label-text {
+    margin-left: 8px;
+    padding-top: 1px;
+}
+
+.iswitch-style-iphone-default .iswitch-label-off .iswitch-label-text {
+    margin-right: 8px;
+    padding-top : 1px;
+}
+
+.iswitch-style-iphone-default .iswitch-label-on .iswitch-label-bg {
+    background-position: 0 -170px;
+    background-repeat  : repeat-x;
+}
+
+.iswitch-style-iphone-default .iswitch-label-off .iswitch-label-bg {
+    background-position: 0 -80px;
+    background-repeat  : repeat-x;
+}
+
+.iswitch-style-iphone-default .iswitch-handle {
+    width : 38px;
+    height: 25px;
+}
