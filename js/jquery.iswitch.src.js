@@ -11,6 +11,7 @@ var __currentlyClicking = null;
 var __dragStartPosition = null;
 var __handleLeftOffset  = null;
 var __dragging          = null;
+var __interval          = {};
 
 function iSwitch(el, options) {
     var $el = $(el);
@@ -229,10 +230,10 @@ function iSwitch(el, options) {
         new_left        = this.isChecked() ? this.rightSide : 0;
         containerRadius = this.options.containerRadius;
 
-        this.handle.animate({left: new_left}, this.duration);
-        this.labelOn.animate({width: new_left + containerRadius}, this.duration);
-        this.labelOnSpan.animate({marginLeft: new_left - this.rightSide + containerRadius}, this.duration);
-        this.labelOffSpan.animate({marginRight: -new_left + containerRadius}, this.duration);
+        this.handle.animate({left: new_left}, this.options.duration);
+        this.labelOn.animate({width: new_left + containerRadius}, this.options.duration);
+        this.labelOnSpan.animate({marginLeft: new_left - this.rightSide + containerRadius}, this.options.duration);
+        this.labelOffSpan.animate({marginRight: -new_left + containerRadius}, this.options.duration);
 
         this.updateStateClass();
     };
@@ -336,6 +337,15 @@ function iSwitch(el, options) {
     return this;
 }
 
+function create_iswitch($control, options) {
+    $control
+        .addClass('iswitch-processed')
+        .data('iswitch-key', __skey);
+
+    // Store in stack
+    __switches[__skey] = new iSwitch($control, options);
+}
+
 // jQuery plugin
 (function($) {
     $.fn.iSwitch = function(options) {
@@ -344,26 +354,35 @@ function iSwitch(el, options) {
         // Only apply to checkbox and radio
         return $(this).filter(':checkbox, :radio').each(function() {
             var $control = $(this);
+            var key      = null;
             var iswitch  = null;
 
             if($control.hasClass('iswitch-processed')) {
                 // If processed
-                var key     = $control.data('iswitch-key');
-                    iswitch = __switches[key];
+                key     = $control.data('iswitch-key');
+                iswitch = __switches[key];
 
                 // TODO: Check for style, label, etc ....
                 iswitch.setOption(options);
             }
             else {
                 // Not yet
-                $control
-                    .addClass('iswitch-processed')
-                    .data('iswitch-key', __skey);
+                if($control.is(':hidden')) {
+                    // we cannot get width of hidden elements, so we need to
+                    // do a trick here
+                    key = __skey;
 
-                iswitch = new iSwitch($control, options);
+                    __interval[key] = setInterval(function() {
+                        if($control.is(':visible')) {
+                            clearInterval(__interval[key]);
+                            create_iswitch($control, options);
+                        }
+                    }, 20);
+                }
+                else {
+                    create_iswitch($control, options);
+                }
 
-                // Store in stack
-                __switches[__skey] = iswitch;
                 __skey++;
             }
         });
