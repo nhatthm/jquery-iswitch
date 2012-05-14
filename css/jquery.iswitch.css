@@ -90,6 +90,11 @@
     z-index : 3;
 }
 
+.iswitch-state-disabled {
+    opacity: 0.5;
+    filter : alpha(opacity=50);
+}
+
 /**
  * Style: iPad
  */
@@ -145,17 +150,12 @@
     left    : -2px;
 }
 
-.iswitch-state-disabled {
-    opacity: 0.5;
-    filter : alpha(opacity=50);
-}
-
 /**
  * Style: iPhone
  */
 .iswitch-style-iphone-default .iswitch-label,
 .iswitch-style-iphone-default .iswitch-label .iswitch-label-bg,
-.iswitch-style-iphone-default .iswitch-handle {
+.iswitch-style-iphone-default .iswitch-handle-inner {
     background : url(../images/iswitch-style-iphone-default.png) 50% 0 no-repeat;
 }
 
@@ -192,6 +192,16 @@
 }
 
 .iswitch-style-iphone-default .iswitch-handle {
-    width : 38px;
+    width : 36px;
     height: 25px;
+    position: relative;
+    overflow: visible;
+}
+
+.iswitch-style-iphone-default .iswitch-handle-inner {
+    width   : 40px;
+    height  : 25px;
+    position: absolute;
+    top     : 0px;
+    left    : -2px;
 }
