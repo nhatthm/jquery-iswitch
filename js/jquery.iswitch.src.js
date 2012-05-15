@@ -11,7 +11,7 @@ var __currentlyClicking = null;
 var __dragStartPosition = null;
 var __handleLeftOffset  = null;
 var __dragging          = null;
-var __interval          = {};
+var __interval          = [];
 
 function iSwitch(el, options) {
     var $el = $(el);
@@ -256,26 +256,28 @@ function iSwitch(el, options) {
 
         localMouseUp = function(event) {
             self.onGlobalUp.apply(self, arguments);
-            $(document).unbind('mousemove touchmove', localMouseMove);
-            $(document).unbind('mouseup touchend', localMouseUp);
+            $(document).unbind('.iSwitch');
         };
 
         this.element
+            .unbind('.iSwitch')
             .bind({
-                refresh: function() {
+                'refresh.iSwitch': function() {
                     self.refresh();
                 },
-                change: function() {
+                'change.iSwitch': function() {
                     self.onChange();
                 }
             });
 
-        this.control.bind('mousedown touchstart', function(event) {
-            self.onMouseDown.apply(self, arguments);
+        this.control
+            .unbind('.iSwitch')
+            .bind('mousedown.iSwitch touchstart.iSwitch', function(event) {
+                self.onMouseDown.apply(self, arguments);
 
-            $(document).bind('mousemove touchmove', localMouseMove);
-            $(document).bind('mouseup touchend', localMouseUp);
-        });
+                $(document).bind('mousemove.iSwitch touchmove.iSwitch', localMouseMove);
+                $(document).bind('mouseup.iSwitch touchend.iSwitch', localMouseUp);
+            });
     };
 
     this.onGlobalMove = function(event) {
@@ -344,6 +346,7 @@ function create_iswitch($control, options) {
 
     // Store in stack
     __switches[__skey] = new iSwitch($control, options);
+    __skey++;
 }
 
 // jQuery plugin
@@ -366,24 +369,27 @@ function create_iswitch($control, options) {
                 iswitch.setOption(options);
             }
             else {
+                // Hide the control
+                $control.css('visibility', 'hidden');
+
                 // Not yet
                 if($control.is(':hidden')) {
                     // we cannot get width of hidden elements, so we need to
                     // do a trick here
-                    key = __skey;
+                    // Note: Elements with visibility: hidden or opacity: 0 are
+                    // considered visible in jQuery
+                    key = __interval.length;
 
                     __interval[key] = setInterval(function() {
                         if($control.is(':visible')) {
                             clearInterval(__interval[key]);
                             create_iswitch($control, options);
                         }
-                    }, 20);
+                    }, 1);
                 }
                 else {
                     create_iswitch($control, options);
                 }
-
-                __skey++;
             }
         });
     };
