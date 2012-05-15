@@ -5,6 +5,7 @@
  * @porject jQuery iSwitch
  * @version 0.1
  */
+
 var __switches          = {};
 var __skey              = 0;
 var __currentlyClicking = null;
@@ -66,6 +67,16 @@ function iSwitch(el, options) {
         return this.element.prop('checked');
     };
 
+    this.enable = function() {
+        this.element.removeAttr('disabled');
+        this.updateStateClass();
+    };
+
+    this.disable = function() {
+        this.element.attr('disabled', 'disabled');
+        this.updateStateClass();
+    };
+
     this.calculateContainerWidth = function() {
         var labelOnWidth  = this.labelOn.width(),
             labelOffWidth = this.labelOff.width(),
@@ -117,14 +128,14 @@ function iSwitch(el, options) {
         this.control.removeClass('iswitch-state-checked iswitch-state-unchecked iswitch-state-checked iswitch-state-disabled');
 
         if(this.isChecked()) {
-            this.control.addClass('iswitch-state-checked iswitch-state-checked');
+            this.control.addClass('iswitch-state-checked');
         }
         else {
-            this.control.addClass('iswitch-state-checked iswitch-state-unchecked');
+            this.control.addClass('iswitch-state-unchecked');
         }
 
         if(this.isDisabled()) {
-            this.control.addClass('iswitch-state-checked iswitch-state-disabled');
+            this.control.addClass('iswitch-state-disabled');
         }
     };
 
@@ -226,11 +237,14 @@ function iSwitch(el, options) {
 
     this.refresh = function() {
         var new_left, containerRadius;
+        var self = this;
 
         new_left        = this.isChecked() ? this.rightSide : 0;
         containerRadius = this.options.containerRadius;
 
-        this.handle.animate({left: new_left}, this.options.duration);
+        this.handle.animate({left: new_left}, this.options.duration, function() {
+            self.element.trigger('switch');
+        });
         this.labelOn.animate({width: new_left + containerRadius}, this.options.duration);
         this.labelOnSpan.animate({marginLeft: new_left - this.rightSide + containerRadius}, this.options.duration);
         this.labelOffSpan.animate({marginRight: -new_left + containerRadius}, this.options.duration);
@@ -351,8 +365,10 @@ function create_iswitch($control, options) {
 
 // jQuery plugin
 (function($) {
-    $.fn.iSwitch = function(options) {
-        options = $.extend($.fn.iSwitch.defaults, options);
+    $.fn.iSwitch = function(options, args) {
+        if(typeof options === 'object') {
+            options = $.extend($.fn.iSwitch.defaults, options);
+        }
 
         // Only apply to checkbox and radio
         return $(this).filter(':checkbox, :radio').each(function() {
@@ -365,8 +381,13 @@ function create_iswitch($control, options) {
                 key     = $control.data('iswitch-key');
                 iswitch = __switches[key];
 
-                // TODO: Check for style, label, etc ....
-                iswitch.setOption(options);
+                if(typeof options === 'object') {
+                    // TODO: Check for style, label, etc ....
+                    iswitch.setOption(options);
+                }
+                else if(typeof iswitch[options] === 'function') {
+                    iswitch[options](args);
+                }
             }
             else {
                 // Hide the control
